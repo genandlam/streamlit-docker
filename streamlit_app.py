@@ -2,33 +2,55 @@ import altair as alt
 import math
 import pandas as pd
 import streamlit as st
-
-"""
-# Welcome to Streamlit!
-
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [starting out docker commands] (https://docs.streamlit.io/knowledge-base/tutorials/deploy/docker#prerequisites)
-
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+import matplotlib.pyplot as plt
+import numpy as np
 
 
-def create_table():
-    df = pd.DataFrame(columns=['name','age','color'])
-    colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
-    config = {
-        'name' : st.column_config.TextColumn('Full Name (required)', width='large', required=True),
-        'age' : st.column_config.NumberColumn('Age (years)', min_value=0, max_value=122),
-        'color' : st.column_config.SelectboxColumn('Favorite Color', options=colors)
-    }
+st.set_page_config(
+     page_title="Histogram Charts ",
+     page_icon="❀",
+     layout="wide",
+     initial_sidebar_state="expanded",
+     menu_items={
+    #     'Get Help': 'https://developers.snowflake.com',
+#         'About': "This is an *extremely* cool app powered by Snowpark for Python, Snowflake Data Marketplace and Streamlit"
+     }
+)
 
-    result = st.data_editor(df, column_config = config, num_rows='dynamic')
+col1, col2, col3 = st.columns(3)
+with st.container():
+    with col1:
+        st.subheader('CO2 Emissions by Country')
+        arr = np.random.normal(1, 1, size=100)
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
+    with col2:
+        st.subheader('Temp')
+        arr = np.random.normal(1, 1, size=100)
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
+    with col3:
+        arr = np.random.normal(1, 1, size=100)
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
 
-    if st.button('Get results'):
-        st.write(result)
+# Display an interactive chart to visualize CO2 Emissions by Top N Countries
+with st.container():
+    st.subheader('Input comments')
+    with st.expander(""):
+        df = pd.DataFrame(columns=['name','id','comment'])
+        
+        config = {
+            'name' : st.column_config.TextColumn('Name (required)', width='large', required=True),
+            'id' : st.column_config.TextColumn('ID',max_chars=50),
+            'comment': st.column_config.TextColumn('ID',max_chars=500),
+        
+        }
+
+        result = st.data_editor(df, column_config = config, num_rows='dynamic')
+
+        if st.button('Get results'):
+            st.write(result)
 
 
-if __name__ == "__main__":
-
-    create_table()
+    
