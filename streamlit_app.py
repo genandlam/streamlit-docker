@@ -24,6 +24,7 @@ def get_data():
 with st.container():
      st.subheader('Model Metrics/scores')
      df = get_data()
+     
      st.dataframe(df, use_container_width=True)
 
 # Display an interactive chart to visualize CO2 Emissions by Top N Countries
