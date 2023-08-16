@@ -22,11 +22,21 @@ def get_data():
     
 #col1, col2= st.columns(2)
 with st.container():
-     st.subheader('Model Metrics/scores')
-     df = get_data()
-     
-     st.dataframe(df, use_container_width=True)
+    with st.expander(""):
+        st.subheader('Model Metrics/scores')
+        df = get_data()
+        df = pd.DataFrame(
+                        [
+                            {"command": "st.selectbox", "rating": 4, "is_widget": True},
+                            {"command": "st.balloons", "rating": 5, "is_widget": False},
+                            {"command": "st.time_input", "rating": 3, "is_widget": True},
+                        ]
+                    )
 
+        
+    st.dataframe(df, use_container_width=True)
+
+"""
 # Display an interactive chart to visualize CO2 Emissions by Top N Countries
 with st.container():
     st.subheader('Input comments')
@@ -45,5 +55,5 @@ with st.container():
         if st.button('Get results'):
             st.write(result)
 
-
+"""
     
