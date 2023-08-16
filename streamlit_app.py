@@ -17,22 +17,14 @@ st.set_page_config(
      }
 )
 
-col1, col2, col3 = st.columns(3)
+def get_data(): 
+    df = pd.read_csv('RAWDATA.csv')
+    
+#col1, col2= st.columns(2)
 with st.container():
-    with col1:
-        st.subheader('CO2 Emissions by Country')
-        arr = np.random.normal(1, 1, size=100)
-        fig, ax = plt.subplots()
-        ax.hist(arr, bins=20)
-    with col2:
-        st.subheader('Temp')
-        arr = np.random.normal(1, 1, size=100)
-        fig, ax = plt.subplots()
-        ax.hist(arr, bins=20)
-    with col3:
-        arr = np.random.normal(1, 1, size=100)
-        fig, ax = plt.subplots()
-        ax.hist(arr, bins=20)
+     st.subheader('Model Metrics/scores')
+     df = get_data()
+     st.dataframe(df, use_container_width=True)
 
 # Display an interactive chart to visualize CO2 Emissions by Top N Countries
 with st.container():
