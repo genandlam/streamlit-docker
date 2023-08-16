@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 #import matplotlib.pyplot as plt
 import numpy as np
-
+import plotly.express as px
 
 st.set_page_config(
      page_title="Histogram Charts ",
@@ -19,41 +19,21 @@ st.set_page_config(
 
 def get_data(): 
     df = pd.read_csv('data/RAWDATA.csv')
+    df = df.fillna(0.0)
+    df =df.round(2)
+    return df
+
+st.subheader('Stack chart')
+with st.container():
+    df = get_data()
+    fig = px.bar(df[['INTEL_KEY','TP_CNT','FP_CNT']], x="INTEL_KEY", y=['TP_CNT','FP_CNT'])
+    st.plotly_chart(fig, use_container_width=True)
     
-#col1, col2= st.columns(2)
+st.subheader('Model Metrics/scores')
 with st.container():
     with st.expander(""):
-        st.subheader('Model Metrics/scores')
-        df = get_data()
-        df = pd.DataFrame(
-                        [
-                            {"command": "st.selectbox", "rating": 4, "is_widget": True},
-                            {"command": "st.balloons", "rating": 5, "is_widget": False},
-                            {"command": "st.time_input", "rating": 3, "is_widget": True},
-                        ]
-                    )
-
         
-    st.dataframe(df, use_container_width=True)
+        st.dataframe(df[['INTEL_KEY','Precision_CNT','Precision_ATR']], use_container_width=True)
 
-"""
-# Display an interactive chart to visualize CO2 Emissions by Top N Countries
-with st.container():
-    st.subheader('Input comments')
-    with st.expander(""):
-        df = pd.DataFrame(columns=['name','id','comment'])
-        
-        config = {
-            'name' : st.column_config.TextColumn('Name (required)', width='large', required=True),
-            'id' : st.column_config.TextColumn('ID',max_chars=50),
-            'comment': st.column_config.TextColumn('ID',max_chars=500),
-        
-        }
 
-        result = st.data_editor(df, column_config = config, num_rows='dynamic')
 
-        if st.button('Get results'):
-            st.write(result)
-
-"""
-    
