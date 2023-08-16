@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 def get_data(): 
-    df = pd.read_csv('RAWDATA.csv')
+    df = pd.read_csv('./data/RAWDATA.csv')
     
 #col1, col2= st.columns(2)
 with st.container():
