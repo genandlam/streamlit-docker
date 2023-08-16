@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN git clone https://github.com/genandlam/streamlit-docker.git .
 
-RUN pip3 install -r requirements.txt
+#COPY . /Users/genevievelam/Documents/GitHub/streamlit-docker/data /app/
+
+RUN pip install -r requirements.txt
 
 EXPOSE 8800
 
