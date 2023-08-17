@@ -2,7 +2,6 @@ import altair as alt
 import math
 import pandas as pd
 import streamlit as st
-#import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 
@@ -22,18 +21,22 @@ def get_data():
     df = df.fillna(0.0)
     df =df.round(2)
     return df
+st.subheader('Model Metrics/scores')
 
-st.subheader('Stack chart')
 with st.container():
     df = get_data()
     fig = px.bar(df[['INTEL_KEY','TP_CNT','FP_CNT']], x="INTEL_KEY", y=['TP_CNT','FP_CNT'])
     st.plotly_chart(fig, use_container_width=True)
     
-st.subheader('Model Metrics/scores')
+st.subheader('Table for scores')
 with st.container():
     with st.expander(""):
-        
-        st.dataframe(df[['INTEL_KEY','Precision_CNT','Precision_ATR']], use_container_width=True)
+
+        x = df[['INTEL_KEY','Precision_CNT','Precision_ATR']]
+        x['Precision_CNT'] = ((df['Precision_CNT']*100).astype(int)).astype(str)+'%'
+        x['Precision_ATR'] =((df['Precision_ATR']*100 ).astype(int)).astype(str)+'%'
+        st.dataframe(x, use_container_width=True)
+
 
 
 

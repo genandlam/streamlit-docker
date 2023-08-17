@@ -11,3 +11,6 @@ docker cp location_of data folder  <Image-name>:"/app"
 
 ### local 
 streamlit run streamlit_app.py
+
+
+<img src="images/ui_dashboard.png" alt="Streamlit App" width="500"/>   
